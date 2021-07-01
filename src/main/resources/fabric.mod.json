@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "aroundtheworld",
+  "version": "${version}",
+
+  "name": "Around The World",
+  "description": "",
+  "authors": [
+    "YanisBft"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/aroundtheworld",
+    "sources": "https://github.com/YanisBft/AroundTheWorld"
+  },
+
+  "license": "GPLv3",
+  "icon": "assets/aroundtheworld/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.yanisbft.aroundtheworld.AroundTheWorld"
+    ]
+  },
+  "mixins": [
+    "aroundtheworld.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  }
+}
