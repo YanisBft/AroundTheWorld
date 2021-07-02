@@ -1,5 +1,6 @@
 package com.yanisbft.aroundtheworld.screen;
 
+import com.yanisbft.aroundtheworld.item.BiomeEmblemItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -21,7 +22,12 @@ public class TravellerScreenHandler extends ScreenHandler {
         this.inventory = inventory;
 
         // traveller inventory
-        this.addSlot(new Slot(inventory, 0, 62 + 18, 17 + 18));
+        this.addSlot(new Slot(inventory, 0, 62 + 18, 17 + 18) {
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return (stack.getItem() instanceof BiomeEmblemItem) && super.canInsert(stack);
+            }
+        });
 
         // player inventory
         for (int i = 0; i < 3; i++) {
