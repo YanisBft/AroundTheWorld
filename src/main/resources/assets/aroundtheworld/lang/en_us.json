@@ -1,0 +1,10 @@
+{
+  "block.aroundtheworld.traveller": "Traveller",
+
+  "container.aroundtheworld.traveller": "Traveller",
+
+  "item.aroundtheworld.traveller_key": "Traveller Key",
+  "item.aroundtheworld.traveller_key.owner": "Belongs to %s",
+
+  "itemGroup.aroundtheworld.main": "Around The World"
+}
