@@ -1,14 +1,21 @@
 package com.yanisbft.aroundtheworld;
 
+import com.yanisbft.aroundtheworld.block.ATWBlocks;
+import com.yanisbft.aroundtheworld.item.ATWItems;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
 
 public class AroundTheWorld implements ModInitializer {
+	private static final String MODID = "aroundtheworld";
+
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
+		ATWBlocks.init();
+		ATWBlockEntities.init();
+		ATWItems.init();
+	}
 
-		System.out.println("Hello Fabric world!");
+	public static Identifier id(String name) {
+		return new Identifier(MODID, name);
 	}
 }
