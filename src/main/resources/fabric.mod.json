@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "com.yanisbft.aroundtheworld.AroundTheWorld"
+    ],
+    "client": [
+      "com.yanisbft.aroundtheworld.client.ATWClient"
     ]
   },
   "mixins": [

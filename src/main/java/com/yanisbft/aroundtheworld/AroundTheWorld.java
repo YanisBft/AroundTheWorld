@@ -1,7 +1,9 @@
 package com.yanisbft.aroundtheworld;
 
 import com.yanisbft.aroundtheworld.block.ATWBlocks;
+import com.yanisbft.aroundtheworld.block.entity.ATWBlockEntities;
 import com.yanisbft.aroundtheworld.item.ATWItems;
+import com.yanisbft.aroundtheworld.screen.ATWScreenHandlers;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 
@@ -12,6 +14,7 @@ public class AroundTheWorld implements ModInitializer {
 	public void onInitialize() {
 		ATWBlocks.init();
 		ATWBlockEntities.init();
+		ATWScreenHandlers.init();
 		ATWItems.init();
 	}
 
