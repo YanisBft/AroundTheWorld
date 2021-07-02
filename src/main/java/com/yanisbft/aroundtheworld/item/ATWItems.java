@@ -10,7 +10,8 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 public class ATWItems {
-    public static final Item TRAVELLER = register(ATWBlocks.TRAVELLER, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
+    public static final Item TRAVELLER = register(ATWBlocks.TRAVELLER, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(ATWItemGroups.MAIN));
+    public static final Item TRAVELLER_KEY = register("traveller_key", new TravellerKeyItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(ATWItemGroups.MAIN)));
 
     private static Item register(String name, Item item) {
         return Registry.register(Registry.ITEM, AroundTheWorld.id(name), item);
