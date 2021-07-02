@@ -2,7 +2,7 @@ package com.yanisbft.aroundtheworld.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.yanisbft.aroundtheworld.AroundTheWorld;
-import com.yanisbft.aroundtheworld.screen.TravellerScreenHandler;
+import com.yanisbft.aroundtheworld.screen.TravelerScreenHandler;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -10,10 +10,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class TravellerScreen extends HandledScreen<TravellerScreenHandler> {
-    private static final Identifier TEXTURE = AroundTheWorld.id("textures/gui/traveller.png");
+public class TravelerScreen extends HandledScreen<TravelerScreenHandler> {
+    private static final Identifier TEXTURE = AroundTheWorld.id("textures/gui/traveler.png");
 
-    public TravellerScreen(TravellerScreenHandler handler, PlayerInventory playerInventory, Text title) {
+    public TravelerScreen(TravelerScreenHandler handler, PlayerInventory playerInventory, Text title) {
         super(handler, playerInventory, title);
     }
 

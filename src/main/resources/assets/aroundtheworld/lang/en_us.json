@@ -1,14 +1,14 @@
 {
-  "block.aroundtheworld.traveller": "Traveller",
-  "block.aroundtheworld.traveller.no_biome_emblem": "No biome emblem is present",
-  "block.aroundtheworld.traveller.no_biome_found": "No biome was found close enough",
-  "block.aroundtheworld.traveller.not_owner.traveller": "This traveller is not yours!",
-  "block.aroundtheworld.traveller.not_owner.traveller_key": "This traveller key is not yours!",
+  "block.aroundtheworld.traveler": "Traveler",
+  "block.aroundtheworld.traveler.no_biome_emblem": "No biome emblem is present",
+  "block.aroundtheworld.traveler.no_biome_found": "No biome was found close enough",
+  "block.aroundtheworld.traveler.not_owner.traveler": "This traveler is not yours!",
+  "block.aroundtheworld.traveler.not_owner.traveler_key": "This traveler key is not yours!",
 
-  "container.aroundtheworld.traveller": "Traveller",
+  "container.aroundtheworld.traveler": "Traveler",
 
-  "item.aroundtheworld.traveller_key": "Traveller Key",
-  "item.aroundtheworld.traveller_key.owner": "Belongs to %s",
+  "item.aroundtheworld.traveler_key": "Traveler Key",
+  "item.aroundtheworld.traveler_key.owner": "Belongs to %s",
   "item.aroundtheworld.plains_biome_emblem": "Plains Biome Emblem",
   "item.aroundtheworld.forest_biome_emblem": "Forest Biome Emblem",
   "item.aroundtheworld.desert_biome_emblem": "Desert Biome Emblem",

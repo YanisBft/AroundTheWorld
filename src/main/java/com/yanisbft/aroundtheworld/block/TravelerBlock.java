@@ -1,8 +1,8 @@
 package com.yanisbft.aroundtheworld.block;
 
-import com.yanisbft.aroundtheworld.block.entity.TravellerBlockEntity;
+import com.yanisbft.aroundtheworld.block.entity.TravelerBlockEntity;
 import com.yanisbft.aroundtheworld.item.BiomeEmblemItem;
-import com.yanisbft.aroundtheworld.item.TravellerKeyItem;
+import com.yanisbft.aroundtheworld.item.TravelerKeyItem;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -23,9 +23,9 @@ import net.minecraft.world.biome.Biome;
 
 import java.util.UUID;
 
-public class TravellerBlock extends BlockWithEntity {
+public class TravelerBlock extends BlockWithEntity {
 
-    public TravellerBlock(Settings settings) {
+    public TravelerBlock(Settings settings) {
         super(settings);
     }
 
@@ -36,48 +36,48 @@ public class TravellerBlock extends BlockWithEntity {
         }
 
         BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof TravellerBlockEntity travellerBlockEntity) {
+        if (blockEntity instanceof TravelerBlockEntity travelerBlockEntity) {
             ItemStack handStack = player.getStackInHand(hand);
             UUID playerUuid = player.getUuid();
 
             // if the traveller block does not have an owner yet
-            if (travellerBlockEntity.getOwner() == null) {
-                travellerBlockEntity.setOwner(playerUuid);
+            if (travelerBlockEntity.getOwner() == null) {
+                travelerBlockEntity.setOwner(playerUuid);
             }
 
             // if the player is the owner of the traveller block
-            if (playerUuid.equals(travellerBlockEntity.getOwner())) {
+            if (playerUuid.equals(travelerBlockEntity.getOwner())) {
 
                 // if the player holds a traveller key
-                if (handStack.getItem() instanceof TravellerKeyItem travellerKeyItem) {
+                if (handStack.getItem() instanceof TravelerKeyItem travelerKeyItem) {
 
                     // if the player is the owner of the traveller key
-                    if (playerUuid.equals(travellerKeyItem.getOwner(handStack))) {
+                    if (playerUuid.equals(travelerKeyItem.getOwner(handStack))) {
 
                         if (world instanceof ServerWorld serverWorld && player instanceof ServerPlayerEntity serverPlayer) {
-                            Biome biome = this.getBiome(serverWorld, travellerBlockEntity);
+                            Biome biome = this.getBiome(serverWorld, travelerBlockEntity);
 
                             if (biome != null) {
-                                this.teleportToBiome(serverWorld, serverPlayer, biome, travellerBlockEntity.getPos());
+                                this.teleportToBiome(serverWorld, serverPlayer, biome, travelerBlockEntity.getPos());
                             } else {
-                                player.sendMessage(new TranslatableText("block.aroundtheworld.traveller.no_biome_emblem"), true);
+                                player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.no_biome_emblem"), true);
                             }
                         }
                     } else {
-                        player.sendMessage(new TranslatableText("block.aroundtheworld.traveller.not_owner.traveller_key"), true);
+                        player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.not_owner.traveler_key"), true);
                     }
                 } else {
-                    player.openHandledScreen(travellerBlockEntity);
+                    player.openHandledScreen(travelerBlockEntity);
                 }
             } else {
-                player.sendMessage(new TranslatableText("block.aroundtheworld.traveller.not_owner.traveller"), true);
+                player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.not_owner.traveler"), true);
             }
         }
 
         return ActionResult.CONSUME;
     }
 
-    private Biome getBiome(ServerWorld world, TravellerBlockEntity blockEntity) {
+    private Biome getBiome(ServerWorld world, TravelerBlockEntity blockEntity) {
         ItemStack stack = blockEntity.getStack(0);
 
         if (!stack.isEmpty() && stack.getItem() instanceof BiomeEmblemItem biomeEmblemItem) {
@@ -92,9 +92,9 @@ public class TravellerBlock extends BlockWithEntity {
         BlockPos biomePos = world.locateBiome(biome, pos, 6400, 8);
 
         if (biomePos != null) {
-            player.teleport(world, biomePos.getX(), biomePos.getY(), biomePos.getZ(), player.getYaw(), player.getPitch());
+            player.teleport(world, biomePos.getX(), biomePos.getZ(), biomePos.getZ(), player.getYaw(), player.getPitch());
         } else {
-            player.sendMessage(new TranslatableText("block.aroundtheworld.traveller.no_biome_found"), true);
+            player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.no_biome_found"), true);
         }
     }
 
@@ -105,6 +105,6 @@ public class TravellerBlock extends BlockWithEntity {
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new TravellerBlockEntity(pos, state);
+        return new TravelerBlockEntity(pos, state);
     }
 }

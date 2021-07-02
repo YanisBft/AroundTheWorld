@@ -1,6 +1,6 @@
 package com.yanisbft.aroundtheworld.block.entity;
 
-import com.yanisbft.aroundtheworld.screen.TravellerScreenHandler;
+import com.yanisbft.aroundtheworld.screen.TravelerScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,19 +16,19 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.UUID;
 
-public class TravellerBlockEntity extends LockableContainerBlockEntity {
+public class TravelerBlockEntity extends LockableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
     private UUID owner;
     private long lastUsed;
 
-    public TravellerBlockEntity(BlockPos pos, BlockState state) {
-        super(ATWBlockEntities.TRAVELLER, pos, state);
+    public TravelerBlockEntity(BlockPos pos, BlockState state) {
+        super(ATWBlockEntities.TRAVELER, pos, state);
         this.inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     }
 
     @Override
     protected Text getContainerName() {
-        return new TranslatableText("container.aroundtheworld.traveller");
+        return new TranslatableText("container.aroundtheworld.traveler");
     }
 
     @Override
@@ -108,7 +108,7 @@ public class TravellerBlockEntity extends LockableContainerBlockEntity {
 
     @Override
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-        return new TravellerScreenHandler(syncId, playerInventory, this);
+        return new TravelerScreenHandler(syncId, playerInventory, this);
     }
 
     @Override

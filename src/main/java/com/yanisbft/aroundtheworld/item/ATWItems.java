@@ -13,8 +13,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 
 public class ATWItems {
-    public static final Item TRAVELLER = register(ATWBlocks.TRAVELLER, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(ATWItemGroups.MAIN));
-    public static final Item TRAVELLER_KEY = register("traveller_key", new TravellerKeyItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(ATWItemGroups.MAIN)));
+    public static final Item TRAVELER = register(ATWBlocks.TRAVELER, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(ATWItemGroups.MAIN));
+    public static final Item TRAVELER_KEY = register("traveler_key", new TravelerKeyItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(ATWItemGroups.MAIN)));
 
     public static final Item PLAINS_BIOME_EMBLEM = registerBiomeEmblem("plains_biome_emblem", BiomeKeys.PLAINS);
     public static final Item FOREST_BIOME_EMBLEM = registerBiomeEmblem("forest_biome_emblem", BiomeKeys.FOREST);

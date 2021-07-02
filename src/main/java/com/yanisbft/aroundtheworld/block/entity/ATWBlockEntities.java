@@ -8,7 +8,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.registry.Registry;
 
 public class ATWBlockEntities {
-    public static final BlockEntityType<TravellerBlockEntity> TRAVELLER = register("traveller", FabricBlockEntityTypeBuilder.create(TravellerBlockEntity::new, ATWBlocks.TRAVELLER));
+    public static final BlockEntityType<TravelerBlockEntity> TRAVELER = register("traveler", FabricBlockEntityTypeBuilder.create(TravelerBlockEntity::new, ATWBlocks.TRAVELER));
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, FabricBlockEntityTypeBuilder<T> builder) {
         return Registry.register(Registry.BLOCK_ENTITY_TYPE, AroundTheWorld.id(name), builder.build());

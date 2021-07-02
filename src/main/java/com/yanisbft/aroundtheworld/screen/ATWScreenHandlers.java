@@ -6,7 +6,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 
 public class ATWScreenHandlers {
-    public static final ScreenHandlerType<TravellerScreenHandler> TRAVELLER = register("traveller", TravellerScreenHandler::new);
+    public static final ScreenHandlerType<TravelerScreenHandler> TRAVELER = register("traveler", TravelerScreenHandler::new);
 
     private static <T extends ScreenHandler> ScreenHandlerType<T> register(String name, ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory) {
         return ScreenHandlerRegistry.registerSimple(AroundTheWorld.id(name), factory);

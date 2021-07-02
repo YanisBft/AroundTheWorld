@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aroundtheworld:item/traveller_key"
+    "layer0": "aroundtheworld:item/traveler_key"
   }
 }

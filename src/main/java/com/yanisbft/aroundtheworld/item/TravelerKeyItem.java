@@ -13,9 +13,9 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.UUID;
 
-public class TravellerKeyItem extends Item {
+public class TravelerKeyItem extends Item {
 
-    public TravellerKeyItem(Settings settings) {
+    public TravelerKeyItem(Settings settings) {
         super(settings);
     }
 
@@ -25,7 +25,7 @@ public class TravellerKeyItem extends Item {
         if (nbt != null && nbt.contains("Owner")) {
             PlayerEntity player = world.getPlayerByUuid(nbt.getUuid("Owner"));
             if (player != null) {
-                tooltip.add(new TranslatableText("item.aroundtheworld.traveller_key.owner", player.getEntityName()).formatted(Formatting.GRAY));
+                tooltip.add(new TranslatableText("item.aroundtheworld.traveler_key.owner", player.getEntityName()).formatted(Formatting.GRAY));
             }
         }
         super.appendTooltip(stack, world, tooltip, context);

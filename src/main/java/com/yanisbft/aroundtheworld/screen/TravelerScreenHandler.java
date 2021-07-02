@@ -9,15 +9,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
-public class TravellerScreenHandler extends ScreenHandler {
+public class TravelerScreenHandler extends ScreenHandler {
     private final Inventory inventory;
 
-    public TravellerScreenHandler(int syncId, PlayerInventory playerInventory) {
+    public TravelerScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(1));
     }
 
-    public TravellerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
-        super(ATWScreenHandlers.TRAVELLER, syncId);
+    public TravelerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+        super(ATWScreenHandlers.TRAVELER, syncId);
         checkSize(inventory, 1);
         this.inventory = inventory;
 
