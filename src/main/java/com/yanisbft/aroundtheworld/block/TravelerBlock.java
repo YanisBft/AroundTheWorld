@@ -92,10 +92,17 @@ public class TravelerBlock extends BlockWithEntity {
         BlockPos biomePos = world.locateBiome(biome, pos, 6400, 8);
 
         if (biomePos != null) {
-            player.teleport(world, biomePos.getX(), biomePos.getZ(), biomePos.getZ(), player.getYaw(), player.getPitch());
+            player.teleport(world, biomePos.getX(), this.getSurfacePos(world, pos).getY(), biomePos.getZ(), player.getYaw(), player.getPitch());
         } else {
             player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.no_biome_found"), true);
         }
+    }
+
+    private BlockPos getSurfacePos(ServerWorld world, BlockPos pos) {
+        if (world.getBlockState(pos).isAir()) {
+            return pos;
+        }
+        return this.getSurfacePos(world, pos.up());
     }
 
     @Override
