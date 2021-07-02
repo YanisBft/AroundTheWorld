@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -19,6 +20,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+
+import java.util.UUID;
 
 public class TravellerBlock extends BlockWithEntity {
 
@@ -35,19 +38,39 @@ public class TravellerBlock extends BlockWithEntity {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof TravellerBlockEntity travellerBlockEntity) {
             ItemStack handStack = player.getStackInHand(hand);
+            UUID playerUuid = player.getUuid();
 
-            if (handStack.getItem() instanceof TravellerKeyItem) {
-                if (world instanceof ServerWorld serverWorld && player instanceof ServerPlayerEntity serverPlayer) {
-                    Biome biome = this.getBiome(serverWorld, travellerBlockEntity);
+            // if the traveller block does not have an owner yet
+            if (travellerBlockEntity.getOwner() == null) {
+                travellerBlockEntity.setOwner(playerUuid);
+            }
 
-                    if (biome != null) {
-                        this.teleportToBiome(serverWorld, serverPlayer, biome, travellerBlockEntity.getPos());
+            // if the player is the owner of the traveller block
+            if (playerUuid.equals(travellerBlockEntity.getOwner())) {
+
+                // if the player holds a traveller key
+                if (handStack.getItem() instanceof TravellerKeyItem travellerKeyItem) {
+
+                    // if the player is the owner of the traveller key
+                    if (playerUuid.equals(travellerKeyItem.getOwner(handStack))) {
+
+                        if (world instanceof ServerWorld serverWorld && player instanceof ServerPlayerEntity serverPlayer) {
+                            Biome biome = this.getBiome(serverWorld, travellerBlockEntity);
+
+                            if (biome != null) {
+                                this.teleportToBiome(serverWorld, serverPlayer, biome, travellerBlockEntity.getPos());
+                            } else {
+                                player.sendMessage(new TranslatableText("block.aroundtheworld.traveller.no_biome_emblem"), true);
+                            }
+                        }
                     } else {
-                        //TODO error message: no biome selected
+                        player.sendMessage(new TranslatableText("block.aroundtheworld.traveller.not_owner.traveller_key"), true);
                     }
+                } else {
+                    player.openHandledScreen(travellerBlockEntity);
                 }
             } else {
-                player.openHandledScreen(travellerBlockEntity);
+                player.sendMessage(new TranslatableText("block.aroundtheworld.traveller.not_owner.traveller"), true);
             }
         }
 
@@ -71,7 +94,7 @@ public class TravellerBlock extends BlockWithEntity {
         if (biomePos != null) {
             player.teleport(world, biomePos.getX(), biomePos.getY(), biomePos.getZ(), player.getYaw(), player.getPitch());
         } else {
-            //TODO error message: no biome found
+            player.sendMessage(new TranslatableText("block.aroundtheworld.traveller.no_biome_found"), true);
         }
     }
 

@@ -14,8 +14,11 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.UUID;
+
 public class TravellerBlockEntity extends LockableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
+    private UUID owner;
     private long lastUsed;
 
     public TravellerBlockEntity(BlockPos pos, BlockState state) {
@@ -43,14 +46,20 @@ public class TravellerBlockEntity extends LockableContainerBlockEntity {
         super.readNbt(nbt);
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
         Inventories.readNbt(nbt, this.inventory);
-        this.lastUsed = nbt.getLong("lastUsed");
+        if (nbt.getUuid("Owner") != null) {
+            this.owner = nbt.getUuid("Owner");
+        }
+        this.lastUsed = nbt.getLong("LastUsed");
     }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, this.inventory);
-        nbt.putLong("lastUsed", this.lastUsed);
+        if (this.owner != null) {
+            nbt.putUuid("Owner", this.owner);
+        }
+        nbt.putLong("LastUsed", this.lastUsed);
         return nbt;
     }
 
@@ -79,6 +88,14 @@ public class TravellerBlockEntity extends LockableContainerBlockEntity {
     @Override
     public boolean canPlayerUse(PlayerEntity player) {
         return this.world.getBlockEntity(this.pos) == this;
+    }
+
+    public UUID getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(UUID owner) {
+        this.owner = owner;
     }
 
     public long getLastUsed() {

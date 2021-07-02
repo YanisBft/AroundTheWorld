@@ -1,5 +1,9 @@
 {
   "block.aroundtheworld.traveller": "Traveller",
+  "block.aroundtheworld.traveller.no_biome_emblem": "No biome emblem is present",
+  "block.aroundtheworld.traveller.no_biome_found": "No biome was found close enough",
+  "block.aroundtheworld.traveller.not_owner.traveller": "This traveller is not yours!",
+  "block.aroundtheworld.traveller.not_owner.traveller_key": "This traveller key is not yours!",
 
   "container.aroundtheworld.traveller": "Traveller",
 

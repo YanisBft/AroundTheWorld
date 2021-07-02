@@ -11,6 +11,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.UUID;
 
 public class TravellerKeyItem extends Item {
 
@@ -28,6 +29,14 @@ public class TravellerKeyItem extends Item {
             }
         }
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    public UUID getOwner(ItemStack stack) {
+        NbtCompound nbt = stack.getTag();
+        if (nbt != null && nbt.contains("Owner")) {
+            return nbt.getUuid("Owner");
+        }
+        return null;
     }
 
     @Override
