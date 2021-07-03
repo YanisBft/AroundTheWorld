@@ -4,13 +4,14 @@
   "version": "${version}",
 
   "name": "Around The World",
-  "description": "",
+  "description": "A mod allowing players to travel to specific biomes",
   "authors": [
     "YanisBft"
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/aroundtheworld",
-    "sources": "https://github.com/YanisBft/AroundTheWorld"
+    "sources": "https://github.com/YanisBft/AroundTheWorld",
+    "issues": "https://github.com/YanisBft/AroundTheWorld/issues"
   },
 
   "license": "GPLv3",
