@@ -49,7 +49,38 @@ public class TravelerScreenHandler extends ScreenHandler {
 
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
-        return super.transferSlot(player, index);
+        ItemStack stack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
+
+        if (slot.hasStack()) {
+            ItemStack slotStack = slot.getStack();
+            stack = slotStack.copy();
+
+            if (index == 0) {
+                if (!this.insertItem(slotStack, 1, 37, true)) {
+                    return ItemStack.EMPTY;
+                }
+                slot.onQuickTransfer(slotStack, stack);
+            } else if (slotStack.getItem() instanceof BiomeEmblemItem) {
+                if (!this.insertItem(slotStack, 0, 1, true)) {
+                    return ItemStack.EMPTY;
+                }
+            }
+
+            if (slotStack.isEmpty()) {
+                slot.setStack(ItemStack.EMPTY);
+            } else {
+                slot.markDirty();
+            }
+
+            if (slotStack.getCount() == stack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTakeItem(player, slotStack);
+        }
+
+        return stack;
     }
 
     @Override
