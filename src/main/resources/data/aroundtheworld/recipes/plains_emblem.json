@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NIN",
+    "IXI",
+    "NIN"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "X": {
+      "item": "minecraft:grass_block"
+    }
+  },
+  "result": {
+    "item": "aroundtheworld:plains_emblem"
+  }
+}
