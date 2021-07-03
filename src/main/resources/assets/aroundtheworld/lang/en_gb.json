@@ -1,0 +1,10 @@
+{
+  "block.aroundtheworld.traveler": "Traveller",
+  "block.aroundtheworld.traveler.not_owner.traveler": "This traveller is not yours!",
+  "block.aroundtheworld.traveler.not_owner.traveler_key": "This traveller key is not yours!",
+  "block.aroundtheworld.traveler.cooldown": "Traveller can only be used every %s seconds",
+
+  "container.aroundtheworld.traveler": "Traveller",
+
+  "item.aroundtheworld.traveler_key": "Traveller Key"
+}
