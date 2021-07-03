@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "aroundtheworld:plains_emblem",
+    "aroundtheworld:desert_emblem",
+    "aroundtheworld:mountains_emblem",
+    "aroundtheworld:forest_emblem",
+    "aroundtheworld:taiga_emblem",
+    "aroundtheworld:swamp_emblem",
+    "aroundtheworld:snowy_tundra_emblem",
+    "aroundtheworld:mushroom_fields_emblem",
+    "aroundtheworld:jungle_emblem",
+    "aroundtheworld:birch_forest_emblem",
+    "aroundtheworld:dark_forest_emblem",
+    "aroundtheworld:savanna_emblem",
+    "aroundtheworld:badlands_emblem"
+  ]
+}

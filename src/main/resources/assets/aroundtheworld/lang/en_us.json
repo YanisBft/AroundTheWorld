@@ -1,6 +1,7 @@
 {
   "block.aroundtheworld.traveler": "Traveler",
   "block.aroundtheworld.traveler.no_biome_emblem": "No biome emblem is present",
+  "block.aroundtheworld.traveler.disabled_emblem": "This biome emblem has been disabled",
   "block.aroundtheworld.traveler.no_biome_found": "No biome was found close enough",
   "block.aroundtheworld.traveler.not_owner.traveler": "This traveler is not yours!",
   "block.aroundtheworld.traveler.not_owner.traveler_key": "This traveler key is not yours!",
@@ -9,9 +10,19 @@
 
   "item.aroundtheworld.traveler_key": "Traveler Key",
   "item.aroundtheworld.traveler_key.owner": "Belongs to %s",
-  "item.aroundtheworld.plains_biome_emblem": "Plains Biome Emblem",
-  "item.aroundtheworld.forest_biome_emblem": "Forest Biome Emblem",
-  "item.aroundtheworld.desert_biome_emblem": "Desert Biome Emblem",
+  "item.aroundtheworld.plains_emblem": "Plains Emblem",
+  "item.aroundtheworld.desert_emblem": "Desert Emblem",
+  "item.aroundtheworld.mountains_emblem": "Mountains Emblem",
+  "item.aroundtheworld.forest_emblem": "Forest Emblem",
+  "item.aroundtheworld.taiga_emblem": "Taiga Emblem",
+  "item.aroundtheworld.swamp_emblem": "Swamp Emblem",
+  "item.aroundtheworld.snowy_tundra_emblem": "Snowy Tundra Emblem",
+  "item.aroundtheworld.mushroom_fields_emblem": "Mushroom Fields Emblem",
+  "item.aroundtheworld.jungle_emblem": "Jungle Emblem",
+  "item.aroundtheworld.birch_forest_emblem": "Birch Forest Emblem",
+  "item.aroundtheworld.dark_forest_emblem": "Dark Forest Emblem",
+  "item.aroundtheworld.savanna_emblem": "Savanna Emblem",
+  "item.aroundtheworld.badlands_emblem": "Badlands Emblem",
 
   "itemGroup.aroundtheworld.main": "Around The World"
 }

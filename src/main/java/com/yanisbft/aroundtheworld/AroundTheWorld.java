@@ -18,6 +18,7 @@ public class AroundTheWorld implements ModInitializer {
 		ATWScreenHandlers.init();
 		ATWItems.init();
 		ATWItemGroups.init();
+		ATWTags.init();
 	}
 
 	public static Identifier id(String name) {

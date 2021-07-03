@@ -1,5 +1,6 @@
 package com.yanisbft.aroundtheworld.block;
 
+import com.yanisbft.aroundtheworld.ATWTags;
 import com.yanisbft.aroundtheworld.block.entity.TravelerBlockEntity;
 import com.yanisbft.aroundtheworld.item.BiomeEmblemItem;
 import com.yanisbft.aroundtheworld.item.TravelerKeyItem;
@@ -56,12 +57,10 @@ public class TravelerBlock extends BlockWithEntity {
                     if (playerUuid.equals(travelerKeyItem.getOwner(handStack))) {
 
                         if (world instanceof ServerWorld serverWorld && player instanceof ServerPlayerEntity serverPlayer) {
-                            Biome biome = this.getBiome(serverWorld, travelerBlockEntity);
+                            Biome biome = this.getBiome(serverWorld, serverPlayer, travelerBlockEntity);
 
                             if (biome != null) {
                                 this.teleportToBiome(serverWorld, serverPlayer, biome, travelerBlockEntity.getPos());
-                            } else {
-                                player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.no_biome_emblem"), true);
                             }
                         }
                     } else {
@@ -78,14 +77,22 @@ public class TravelerBlock extends BlockWithEntity {
         return ActionResult.CONSUME;
     }
 
-    private Biome getBiome(ServerWorld world, TravelerBlockEntity blockEntity) {
+    private Biome getBiome(ServerWorld world, ServerPlayerEntity player, TravelerBlockEntity blockEntity) {
         ItemStack stack = blockEntity.getStack(0);
 
         if (!stack.isEmpty() && stack.getItem() instanceof BiomeEmblemItem biomeEmblemItem) {
-            RegistryKey<Biome> biomeKey = biomeEmblemItem.getBiomeKey();
-            return world.getRegistryManager().get(Registry.BIOME_KEY).get(biomeKey);
+
+            // if the biome emblem is disabled
+            if (ATWTags.DISABLED_BIOME_EMBLEMS.contains(stack.getItem())) {
+                player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.disabled_emblem"), true);
+                return null;
+            } else {
+                RegistryKey<Biome> biomeKey = biomeEmblemItem.getBiomeKey();
+                return world.getRegistryManager().get(Registry.BIOME_KEY).get(biomeKey);
+            }
         }
 
+        player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.no_biome_emblem"), true);
         return null;
     }
 
