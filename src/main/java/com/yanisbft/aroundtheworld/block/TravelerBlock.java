@@ -1,5 +1,6 @@
 package com.yanisbft.aroundtheworld.block;
 
+import com.yanisbft.aroundtheworld.ATWGameRules;
 import com.yanisbft.aroundtheworld.ATWTags;
 import com.yanisbft.aroundtheworld.block.entity.TravelerBlockEntity;
 import com.yanisbft.aroundtheworld.item.BiomeEmblemItem;
@@ -42,25 +43,30 @@ public class TravelerBlock extends BlockWithEntity {
             ItemStack handStack = player.getStackInHand(hand);
             UUID playerUuid = player.getUuid();
 
-            // if the traveller block does not have an owner yet
+            // if the traveler block does not have an owner yet
             if (travelerBlockEntity.getOwner() == null) {
                 travelerBlockEntity.setOwner(playerUuid);
             }
 
-            // if the player is the owner of the traveller block
+            // if the player is the owner of the traveler block
             if (playerUuid.equals(travelerBlockEntity.getOwner())) {
 
-                // if the player holds a traveller key
+                // if the player holds a traveler key
                 if (handStack.getItem() instanceof TravelerKeyItem travelerKeyItem) {
 
-                    // if the player is the owner of the traveller key
+                    // if the player is the owner of the traveler key
                     if (playerUuid.equals(travelerKeyItem.getOwner(handStack))) {
 
                         if (world instanceof ServerWorld serverWorld && player instanceof ServerPlayerEntity serverPlayer) {
                             Biome biome = this.getBiome(serverWorld, serverPlayer, travelerBlockEntity);
 
                             if (biome != null) {
-                                this.teleportToBiome(serverWorld, serverPlayer, biome, travelerBlockEntity.getPos());
+                                int useCooldown = world.getGameRules().getInt(ATWGameRules.TRAVELER_USE_COOLDOWN);
+                                if ((System.currentTimeMillis() - travelerBlockEntity.getLastUsed()) > (useCooldown * 1000L)) {
+                                    this.teleportToBiome(serverWorld, serverPlayer, biome, travelerBlockEntity);
+                                } else {
+                                    player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.cooldown", useCooldown), true);
+                                }
                             }
                         }
                     } else {
@@ -96,11 +102,13 @@ public class TravelerBlock extends BlockWithEntity {
         return null;
     }
 
-    private void teleportToBiome(ServerWorld world, ServerPlayerEntity player, Biome biome, BlockPos pos) {
-        BlockPos biomePos = world.locateBiome(biome, pos, 6400, 8);
+    private void teleportToBiome(ServerWorld world, ServerPlayerEntity player, Biome biome, TravelerBlockEntity blockEntity) {
+        BlockPos blockEntityPos = blockEntity.getPos();
+        BlockPos biomePos = world.locateBiome(biome, blockEntityPos, 6400, 8);
 
         if (biomePos != null) {
-            player.teleport(world, biomePos.getX(), this.getSurfacePos(world, pos).getY(), biomePos.getZ(), player.getYaw(), player.getPitch());
+            player.teleport(world, biomePos.getX(), this.getSurfacePos(world, blockEntityPos).getY(), biomePos.getZ(), player.getYaw(), player.getPitch());
+            blockEntity.setLastUsed(System.currentTimeMillis());
         } else {
             player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.no_biome_found"), true);
         }

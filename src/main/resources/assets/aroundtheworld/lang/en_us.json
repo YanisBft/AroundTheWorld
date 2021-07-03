@@ -1,10 +1,11 @@
 {
   "block.aroundtheworld.traveler": "Traveler",
-  "block.aroundtheworld.traveler.no_biome_emblem": "No biome emblem is present",
-  "block.aroundtheworld.traveler.disabled_emblem": "This biome emblem has been disabled",
-  "block.aroundtheworld.traveler.no_biome_found": "No biome was found close enough",
   "block.aroundtheworld.traveler.not_owner.traveler": "This traveler is not yours!",
   "block.aroundtheworld.traveler.not_owner.traveler_key": "This traveler key is not yours!",
+  "block.aroundtheworld.traveler.no_biome_emblem": "No biome emblem is present",
+  "block.aroundtheworld.traveler.disabled_emblem": "This biome emblem has been disabled",
+  "block.aroundtheworld.traveler.cooldown": "Traveler can only be used every %s seconds",
+  "block.aroundtheworld.traveler.no_biome_found": "No biome was found close enough",
 
   "container.aroundtheworld.traveler": "Traveler",
 

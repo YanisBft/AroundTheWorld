@@ -19,6 +19,7 @@ public class AroundTheWorld implements ModInitializer {
 		ATWItems.init();
 		ATWItemGroups.init();
 		ATWTags.init();
+		ATWGameRules.init();
 	}
 
 	public static Identifier id(String name) {
