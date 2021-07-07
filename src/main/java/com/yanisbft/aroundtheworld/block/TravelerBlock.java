@@ -12,6 +12,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -19,6 +20,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
@@ -107,18 +109,23 @@ public class TravelerBlock extends BlockWithEntity {
         BlockPos biomePos = world.locateBiome(biome, blockEntityPos, 6400, 8);
 
         if (biomePos != null) {
-            player.teleport(world, biomePos.getX(), this.getSurfacePos(world, blockEntityPos).getY(), biomePos.getZ(), player.getYaw(), player.getPitch());
             blockEntity.setLastUsed(System.currentTimeMillis());
+            ChunkPos chunkPos = new ChunkPos(new BlockPos(biomePos.getX(), biomePos.getY(), biomePos.getZ()));
+            world.getChunkManager().addTicket(ChunkTicketType.POST_TELEPORT, chunkPos, 1, player.getId());
+            player.teleport(world, biomePos.getX(), this.getSurfaceHeight(world, biomePos), biomePos.getZ(), player.getYaw(), player.getPitch());
         } else {
             player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.no_biome_found"), true);
         }
     }
 
-    private BlockPos getSurfacePos(ServerWorld world, BlockPos pos) {
+    /**
+     * Returns the Y coordinate of the first block position containing air.
+     */
+    private int getSurfaceHeight(ServerWorld world, BlockPos pos) {
         if (world.getBlockState(pos).isAir()) {
-            return pos;
+            return pos.getY();
         }
-        return this.getSurfacePos(world, pos.up());
+        return this.getSurfaceHeight(world, pos.up());
     }
 
     @Override
