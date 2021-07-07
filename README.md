@@ -1,6 +1,10 @@
 # Around The World
 
+[![CurseForge](http://cf.way2muchnoise.eu/short_500321_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/aroundtheworld)
+
 Around The World is a mod made for [ModFest 1.17](https://modfest.net/1.17/). It allows players to travel to specific biomes.
+
+![aroundtheworld](https://user-images.githubusercontent.com/16228338/124641259-c9f60d00-de8e-11eb-85db-76def4a8a155.png)
 
 ## Gameplay
 
