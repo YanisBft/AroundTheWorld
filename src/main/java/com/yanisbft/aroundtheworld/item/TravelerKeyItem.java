@@ -21,7 +21,7 @@ public class TravelerKeyItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        NbtCompound nbt = stack.getTag();
+        NbtCompound nbt = stack.getNbt();
         if (nbt != null && nbt.contains("Owner")) {
             PlayerEntity player = world.getPlayerByUuid(nbt.getUuid("Owner"));
             if (player != null) {
@@ -32,7 +32,7 @@ public class TravelerKeyItem extends Item {
     }
 
     public UUID getOwner(ItemStack stack) {
-        NbtCompound nbt = stack.getTag();
+        NbtCompound nbt = stack.getNbt();
         if (nbt != null && nbt.contains("Owner")) {
             return nbt.getUuid("Owner");
         }
@@ -41,8 +41,8 @@ public class TravelerKeyItem extends Item {
 
     @Override
     public void onCraft(ItemStack stack, World world, PlayerEntity player) {
-        NbtCompound nbt = stack.getOrCreateTag();
         nbt.putUuid("Owner", player.getUuid());
+        NbtCompound nbt = stack.getOrCreateNbt();
         super.onCraft(stack, world, player);
     }
 }
