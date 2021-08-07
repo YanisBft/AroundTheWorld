@@ -13,7 +13,6 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -21,7 +20,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
@@ -109,9 +107,11 @@ public class TravelerBlock extends BlockWithEntity {
 
         if (biomePos != null) {
             blockEntity.setLastUsed(System.currentTimeMillis());
-            ChunkPos chunkPos = new ChunkPos(new BlockPos(biomePos.getX(), biomePos.getY(), biomePos.getZ()));
-            world.getChunkManager().addTicket(ChunkTicketType.POST_TELEPORT, chunkPos, 1, player.getId());
-            player.teleport(world, biomePos.getX(), this.getSurfaceHeight(world, biomePos), biomePos.getZ(), player.getYaw(), player.getPitch());
+            int x = biomePos.getX();
+            int y = getSurfaceHeight(world, biomePos);
+            int z = biomePos.getZ();
+            player.requestTeleport(x, y, z);
+            player.teleport(world, x, y, z, player.getYaw(), player.getPitch());
         } else {
             player.sendMessage(new TranslatableText("block.aroundtheworld.traveler.no_biome_found"), true);
         }
@@ -120,11 +120,11 @@ public class TravelerBlock extends BlockWithEntity {
     /**
      * Returns the Y coordinate of the first block position containing air.
      */
-    private int getSurfaceHeight(ServerWorld world, BlockPos pos) {
+    private static int getSurfaceHeight(ServerWorld world, BlockPos pos) {
         if (world.getBlockState(pos).isAir()) {
             return pos.getY();
         }
-        return this.getSurfaceHeight(world, pos.up());
+        return getSurfaceHeight(world, pos.up());
     }
 
     @Override
