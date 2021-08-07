@@ -1,5 +1,6 @@
 package com.yanisbft.aroundtheworld.block;
 
+import com.mojang.authlib.GameProfile;
 import com.yanisbft.aroundtheworld.ATWGameRules;
 import com.yanisbft.aroundtheworld.ATWTags;
 import com.yanisbft.aroundtheworld.block.entity.TravelerBlockEntity;
@@ -26,8 +27,6 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
-import java.util.UUID;
-
 public class TravelerBlock extends BlockWithEntity {
 
     public TravelerBlock(Settings settings) {
@@ -43,21 +42,21 @@ public class TravelerBlock extends BlockWithEntity {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof TravelerBlockEntity travelerBlockEntity) {
             ItemStack handStack = player.getStackInHand(hand);
-            UUID playerUuid = player.getUuid();
+            GameProfile gameProfile = player.getGameProfile();
 
             // if the traveler block does not have an owner yet
             if (travelerBlockEntity.getOwner() == null) {
-                travelerBlockEntity.setOwner(playerUuid);
+                travelerBlockEntity.setOwner(gameProfile);
             }
 
             // if the player is the owner of the traveler block
-            if (playerUuid.equals(travelerBlockEntity.getOwner())) {
+            if (gameProfile.equals(travelerBlockEntity.getOwner())) {
 
                 // if the player holds a traveler key
                 if (handStack.getItem() instanceof TravelerKeyItem travelerKeyItem) {
 
                     // if the player is the owner of the traveler key
-                    if (playerUuid.equals(travelerKeyItem.getOwner(handStack))) {
+                    if (gameProfile.equals(travelerKeyItem.getOwner(handStack))) {
 
                         if (world instanceof ServerWorld serverWorld && player instanceof ServerPlayerEntity serverPlayer) {
                             Biome biome = this.getBiome(serverWorld, serverPlayer, travelerBlockEntity);

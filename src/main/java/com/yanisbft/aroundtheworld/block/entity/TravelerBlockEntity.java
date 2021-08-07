@@ -1,5 +1,6 @@
 package com.yanisbft.aroundtheworld.block.entity;
 
+import com.mojang.authlib.GameProfile;
 import com.yanisbft.aroundtheworld.screen.TravelerScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
@@ -8,17 +9,16 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtHelper;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.UUID;
-
 public class TravelerBlockEntity extends LockableContainerBlockEntity {
     private DefaultedList<ItemStack> inventory;
-    private UUID owner;
+    private GameProfile owner;
     private long lastUsed;
 
     public TravelerBlockEntity(BlockPos pos, BlockState state) {
@@ -46,8 +46,8 @@ public class TravelerBlockEntity extends LockableContainerBlockEntity {
         super.readNbt(nbt);
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
         Inventories.readNbt(nbt, this.inventory);
-        if (nbt.getUuid("Owner") != null) {
-            this.owner = nbt.getUuid("Owner");
+        if (nbt.contains("Owner") && nbt.get("Owner") != null) {
+            this.owner = NbtHelper.toGameProfile(nbt.getCompound("Owner"));
         }
         this.lastUsed = nbt.getLong("LastUsed");
     }
@@ -57,7 +57,7 @@ public class TravelerBlockEntity extends LockableContainerBlockEntity {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, this.inventory);
         if (this.owner != null) {
-            nbt.putUuid("Owner", this.owner);
+            nbt.put("Owner", NbtHelper.writeGameProfile(new NbtCompound(), this.owner));
         }
         nbt.putLong("LastUsed", this.lastUsed);
         return nbt;
@@ -90,11 +90,11 @@ public class TravelerBlockEntity extends LockableContainerBlockEntity {
         return this.world.getBlockEntity(this.pos) == this;
     }
 
-    public UUID getOwner() {
+    public GameProfile getOwner() {
         return this.owner;
     }
 
-    public void setOwner(UUID owner) {
+    public void setOwner(GameProfile owner) {
         this.owner = owner;
     }
 
